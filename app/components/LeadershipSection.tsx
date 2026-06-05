@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 const leaders = [
   {
     name: "Billal Hossain",
@@ -23,7 +21,6 @@ export default function LeadershipSection() {
   return (
     <section id="leadership" className="py-24 px-6 bg-[#12121a]">
       <div className="max-w-6xl mx-auto">
-        {/* Header */}
         <div className="text-center mb-16">
           <p className="text-[#c9a84c] text-sm tracking-[0.3em] uppercase font-medium mb-3">
             Our People
@@ -36,7 +33,6 @@ export default function LeadershipSection() {
           </div>
         </div>
 
-        {/* Leaders */}
         <div className="grid md:grid-cols-2 gap-10 max-w-4xl mx-auto">
           {leaders.map((leader) => (
             <div
@@ -44,16 +40,21 @@ export default function LeadershipSection() {
               className="group bg-[#0a0a0f] border border-white/5 rounded-2xl overflow-hidden hover:border-[#c9a84c]/30 transition-all duration-500 hover:shadow-2xl hover:shadow-[#c9a84c]/5"
             >
               {/* Photo */}
-              <div className="relative h-80 overflow-hidden">
-                <Image
+              <div className="relative overflow-hidden" style={{ height: 340 }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
                   src={leader.image}
                   alt={leader.name}
-                  fill
-                  className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    objectPosition: "top center",
+                    display: "block",
+                    transition: "transform 0.7s ease",
+                  }}
+                  className="group-hover:scale-105"
                 />
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-transparent to-transparent" />
-
                 {/* Tag */}
                 <div className="absolute top-4 left-4 px-3 py-1 bg-[#c9a84c] text-black text-xs font-bold tracking-widest uppercase rounded">
                   {leader.tag}

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
 
 const navLinks = [
@@ -34,14 +33,9 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
         <Link href="#home" className="flex items-center gap-3 group">
-          <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-[#c9a84c]/40 group-hover:border-[#c9a84c] transition-colors duration-300">
-            <Image
-              src="/images/logo.jpg"
-              alt="RR Enterprise"
-              fill
-              className="object-cover"
-              priority
-            />
+          <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-[#c9a84c]/40 group-hover:border-[#c9a84c] transition-colors duration-300">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/logo.jpg" alt="RR Enterprise" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
           </div>
           <div>
             <p className="text-white font-bold text-lg leading-tight tracking-wide">

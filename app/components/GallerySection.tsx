@@ -1,48 +1,37 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 
-const galleryItems = [
+const photos = [
   {
-    src: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80",
-    alt: "Heavy excavator at construction site",
-    span: "col-span-2 row-span-2",
+    src: "/images/gallery/gallery-2.jpg",
+    alt: "Heavy excavator at sunset",
+    col: "col-span-2",
+    row: "row-span-2",
   },
   {
-    src: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80",
-    alt: "Tower crane over building",
-    span: "",
+    src: "/images/gallery/gallery-4.jpg",
+    alt: "CAT tracked loader in morning mist",
+    col: "col-span-1",
+    row: "row-span-1",
   },
   {
-    src: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80",
-    alt: "Bulldozer on dirt road",
-    span: "",
+    src: "/images/gallery/gallery-3.jpg",
+    alt: "Road roller compacting asphalt at night",
+    col: "col-span-1",
+    row: "row-span-1",
   },
   {
-    src: "https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=600&q=80",
-    alt: "Dump truck on mine site",
-    span: "",
+    src: "/images/gallery/gallery-1.jpg",
+    alt: "Bulldozer and dump trucks on site",
+    col: "col-span-1",
+    row: "row-span-1",
   },
   {
-    src: "https://images.unsplash.com/photo-1590650153855-d9e808231d41?w=600&q=80",
-    alt: "Industrial crane lifting steel",
-    span: "",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=800&q=80",
-    alt: "Road roller compacting asphalt",
-    span: "col-span-2",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80",
-    alt: "Forklift in warehouse",
-    span: "",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80",
-    alt: "Concrete mixer truck",
-    span: "",
+    src: "/images/gallery/gallery-5.jpg",
+    alt: "Bulldozer tracks glowing at sunset",
+    col: "col-span-2",
+    row: "row-span-1",
   },
 ];
 
@@ -65,30 +54,58 @@ export default function GallerySection() {
           </div>
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[200px] gap-3">
-          {galleryItems.map((item, i) => (
+        {/* Grid — inline styles for guaranteed row heights in production */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gridTemplateRows: "260px 260px 260px",
+            gap: "12px",
+          }}
+        >
+          {photos.map((photo, i) => (
             <div
               key={i}
-              className={`relative overflow-hidden rounded-lg cursor-pointer group ${item.span}`}
-              onClick={() => setLightbox(item.src)}
+              className="group cursor-pointer"
+              style={{
+                position: "relative",
+                overflow: "hidden",
+                borderRadius: "12px",
+                gridColumn: photo.col === "col-span-2" ? "span 2" : "span 1",
+                gridRow: photo.row === "row-span-2" ? "span 2" : "span 1",
+              }}
+              onClick={() => setLightbox(photo.src)}
             >
-              <Image
-                src={item.src}
-                alt={item.alt}
-                fill
-                className="object-cover group-hover:scale-110 transition-transform duration-500"
-                sizes="(max-width: 768px) 50vw, 25vw"
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={photo.src}
+                alt={photo.alt}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  objectPosition: "center",
+                  display: "block",
+                  transition: "transform 0.7s ease",
+                }}
+                className="group-hover:scale-105"
               />
-              {/* Hover overlay */}
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
-                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-10 h-10 rounded-full border-2 border-[#c9a84c] flex items-center justify-center">
-                  <span className="text-[#c9a84c] text-xl leading-none">+</span>
+              {/* hover scrim */}
+              <div
+                style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0)", transition: "background 0.3s ease" }}
+                className="group-hover:bg-black/35"
+              />
+              {/* expand icon */}
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="w-12 h-12 rounded-full border-2 border-[#c9a84c] flex items-center justify-center backdrop-blur-sm bg-black/20">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="15 3 21 3 21 9" />
+                    <polyline points="9 21 3 21 3 15" />
+                    <line x1="21" y1="3" x2="14" y2="10" />
+                    <line x1="3" y1="21" x2="10" y2="14" />
+                  </svg>
                 </div>
               </div>
-              {/* Gold corner accent */}
-              <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-[#c9a84c]/0 group-hover:border-[#c9a84c]/80 transition-colors duration-300 rounded-tl-lg" />
-              <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-[#c9a84c]/0 group-hover:border-[#c9a84c]/80 transition-colors duration-300 rounded-br-lg" />
             </div>
           ))}
         </div>
@@ -97,24 +114,22 @@ export default function GallerySection() {
       {/* Lightbox */}
       {lightbox && (
         <div
-          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center p-6"
+          style={{ background: "rgba(0,0,0,0.95)" }}
           onClick={() => setLightbox(null)}
         >
           <button
-            className="absolute top-6 right-6 text-white/60 hover:text-white text-3xl leading-none"
+            className="absolute top-5 right-6 text-white/50 hover:text-white text-4xl leading-none transition-colors"
             onClick={() => setLightbox(null)}
           >
             ×
           </button>
-          <div className="relative w-full max-w-4xl aspect-video">
-            <Image
-              src={lightbox}
-              alt="Gallery preview"
-              fill
-              className="object-contain"
-              sizes="100vw"
-            />
-          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={lightbox}
+            alt="Gallery preview"
+            style={{ maxWidth: "100%", maxHeight: "85vh", objectFit: "contain", borderRadius: 8 }}
+          />
         </div>
       )}
     </section>
