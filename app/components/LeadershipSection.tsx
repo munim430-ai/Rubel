@@ -51,9 +51,6 @@ export default function LeadershipSection() {
                   fill
                   className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
                 />
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-transparent to-transparent" />
-
                 {/* Tag */}
                 <div className="absolute top-4 left-4 px-3 py-1 bg-[#c9a84c] text-black text-xs font-bold tracking-widest uppercase rounded">
                   {leader.tag}
