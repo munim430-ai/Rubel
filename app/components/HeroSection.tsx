@@ -62,10 +62,10 @@ export default function HeroSection() {
             Discover More
           </a>
           <a
-            href="#contact"
+            href="tel:+8801641155054"
             className="px-8 py-3 border border-white/60 text-white font-semibold text-sm tracking-wide rounded hover:border-[#c9a84c] hover:text-[#c9a84c] transition-all duration-300"
           >
-            Contact Us
+            📞 +880 1641-155054
           </a>
         </div>
       </div>

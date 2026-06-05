@@ -32,19 +32,45 @@ export default function ContactSection() {
             </div>
 
             <div className="space-y-4">
-              {[
-                { label: "Email", value: "info@rrenterprisebd.com" },
-                { label: "Phone", value: "+880 1XXX-XXXXXX" },
-                { label: "Location", value: "Dhaka, Bangladesh" },
-              ].map((item) => (
-                <div key={item.label} className="flex gap-4 items-start">
-                  <span className="text-[#c9a84c] font-medium min-w-[80px] text-sm">
-                    {item.label}
-                  </span>
-                  <span className="text-gray-300 text-sm">{item.value}</span>
-                </div>
-              ))}
+              <div className="flex gap-4 items-start">
+                <span className="text-[#c9a84c] font-medium min-w-[80px] text-sm">Email</span>
+                <a
+                  href="mailto:Aponrubel480@gmail.com"
+                  className="text-gray-300 text-sm hover:text-[#c9a84c] transition-colors"
+                >
+                  Aponrubel480@gmail.com
+                </a>
+              </div>
+              <div className="flex gap-4 items-start">
+                <span className="text-[#c9a84c] font-medium min-w-[80px] text-sm">Phone</span>
+                <a
+                  href="tel:+8801641155054"
+                  className="text-gray-300 text-sm hover:text-[#c9a84c] transition-colors"
+                >
+                  +880 1641-155054
+                </a>
+              </div>
+              <div className="flex gap-4 items-start">
+                <span className="text-[#c9a84c] font-medium min-w-[80px] text-sm">Location</span>
+                <span className="text-gray-300 text-sm">
+                  Rajendrapur, Gazipur, Dhaka
+                </span>
+              </div>
             </div>
+
+            {/* Quick call CTA */}
+            <a
+              href="tel:+8801641155054"
+              className="inline-flex items-center gap-3 px-6 py-3 border border-[#c9a84c]/40 rounded-lg hover:bg-[#c9a84c]/10 hover:border-[#c9a84c] transition-all duration-300 group"
+            >
+              <span className="text-[#c9a84c] text-lg">📞</span>
+              <div>
+                <p className="text-white text-sm font-semibold group-hover:text-[#c9a84c] transition-colors">
+                  Call Us Now
+                </p>
+                <p className="text-gray-400 text-xs">+880 1641-155054</p>
+              </div>
+            </a>
           </div>
 
           {/* Form */}
