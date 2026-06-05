@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export default function Footer() {
   return (
     <footer className="bg-[#0a0a0f] border-t border-white/5 py-12 px-6">
@@ -8,13 +6,9 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row gap-10 justify-between">
           {/* Brand */}
           <div className="flex items-start gap-3">
-            <div className="relative w-12 h-12 rounded-full overflow-hidden border border-[#c9a84c]/30 shrink-0">
-              <Image
-                src="/images/logo.jpg"
-                alt="RR Enterprise"
-                fill
-                className="object-cover"
-              />
+            <div className="w-12 h-12 rounded-full overflow-hidden border border-[#c9a84c]/30 shrink-0">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/logo.jpg" alt="RR Enterprise" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
             </div>
             <div>
               <p className="text-white font-bold">RR Enterprise</p>

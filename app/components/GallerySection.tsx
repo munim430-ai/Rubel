@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 
 const photos = [
   {
@@ -9,35 +8,30 @@ const photos = [
     alt: "Heavy excavator at sunset",
     col: "col-span-2",
     row: "row-span-2",
-    pos: "object-center",
   },
   {
     src: "/images/gallery/gallery-4.jpg",
     alt: "CAT tracked loader in morning mist",
     col: "col-span-1",
     row: "row-span-1",
-    pos: "object-center",
   },
   {
     src: "/images/gallery/gallery-3.jpg",
     alt: "Road roller compacting asphalt at night",
     col: "col-span-1",
     row: "row-span-1",
-    pos: "object-top",
   },
   {
     src: "/images/gallery/gallery-1.jpg",
     alt: "Bulldozer and dump trucks on site",
     col: "col-span-1",
     row: "row-span-1",
-    pos: "object-center",
   },
   {
     src: "/images/gallery/gallery-5.jpg",
     alt: "Bulldozer tracks glowing at sunset",
     col: "col-span-2",
     row: "row-span-1",
-    pos: "object-center",
   },
 ];
 
@@ -60,23 +54,47 @@ export default function GallerySection() {
           </div>
         </div>
 
-        {/* Masonry grid — 3 cols, rows of 260px */}
-        <div className="grid grid-cols-3 grid-rows-[260px_260px_260px] gap-3">
+        {/* Grid — inline styles for guaranteed row heights in production */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gridTemplateRows: "260px 260px 260px",
+            gap: "12px",
+          }}
+        >
           {photos.map((photo, i) => (
             <div
               key={i}
-              className={`relative overflow-hidden rounded-xl cursor-pointer group ${photo.col} ${photo.row}`}
+              className="group cursor-pointer"
+              style={{
+                position: "relative",
+                overflow: "hidden",
+                borderRadius: "12px",
+                gridColumn: photo.col === "col-span-2" ? "span 2" : "span 1",
+                gridRow: photo.row === "row-span-2" ? "span 2" : "span 1",
+              }}
               onClick={() => setLightbox(photo.src)}
             >
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src={photo.src}
                 alt={photo.alt}
-                fill
-                className={`object-cover ${photo.pos} group-hover:scale-105 transition-transform duration-700`}
-                sizes="(max-width: 768px) 100vw, 50vw"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  objectPosition: "center",
+                  display: "block",
+                  transition: "transform 0.7s ease",
+                }}
+                className="group-hover:scale-105"
               />
               {/* hover scrim */}
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/35 transition-colors duration-300" />
+              <div
+                style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0)", transition: "background 0.3s ease" }}
+                className="group-hover:bg-black/35"
+              />
               {/* expand icon */}
               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <div className="w-12 h-12 rounded-full border-2 border-[#c9a84c] flex items-center justify-center backdrop-blur-sm bg-black/20">
@@ -88,9 +106,6 @@ export default function GallerySection() {
                   </svg>
                 </div>
               </div>
-              {/* gold corner */}
-              <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[#c9a84c]/0 group-hover:border-[#c9a84c] transition-colors duration-300 rounded-tl-xl" />
-              <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-[#c9a84c]/0 group-hover:border-[#c9a84c] transition-colors duration-300 rounded-br-xl" />
             </div>
           ))}
         </div>
@@ -99,7 +114,8 @@ export default function GallerySection() {
       {/* Lightbox */}
       {lightbox && (
         <div
-          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-6"
+          className="fixed inset-0 z-50 flex items-center justify-center p-6"
+          style={{ background: "rgba(0,0,0,0.95)" }}
           onClick={() => setLightbox(null)}
         >
           <button
@@ -108,15 +124,12 @@ export default function GallerySection() {
           >
             ×
           </button>
-          <div className="relative w-full max-w-5xl h-[80vh]">
-            <Image
-              src={lightbox}
-              alt="Gallery image"
-              fill
-              className="object-contain"
-              sizes="100vw"
-            />
-          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={lightbox}
+            alt="Gallery preview"
+            style={{ maxWidth: "100%", maxHeight: "85vh", objectFit: "contain", borderRadius: 8 }}
+          />
         </div>
       )}
     </section>
