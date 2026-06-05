@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const leaders = [
   {
-    name: "Mr. Rubel",
+    name: "Billal Hossain",
     title: "Founder & Chairman",
     role: "founder",
     image: "/images/founder.jpg",
@@ -10,7 +10,7 @@ const leaders = [
     tag: "Founder",
   },
   {
-    name: "Chairman",
+    name: "A. R. Rubel",
     title: "Chairman of the Board",
     role: "chairman",
     image: "/images/chairman.jpg",
